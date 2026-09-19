@@ -1,0 +1,6 @@
+{
+  "name": "troth-jev-probe",
+  "private": true,
+  "type": "module",
+  "dependencies": { "ai": "^7.0.107" }
+}

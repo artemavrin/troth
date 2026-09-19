@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><title>TROTH · котировка</title>
+<style>
+  :root{
+    --bg:#0d0f12; --panel:#14171c; --line:#23282f; --ink:#e6e3dc; --dim:#8a8f98;
+    --gold:#c9a227; --ember:#d97757; --cold:#5b8fb9; --bad:#9b4a4a;
+    --mono:"DejaVu Sans Mono","Liberation Mono",Menlo,Consolas,monospace;
+    --sans:"DejaVu Sans","Liberation Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);padding:26px;
+       display:grid;grid-template-columns:490px 1fr;gap:22px;align-items:start}
+  .h{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+     margin-bottom:9px;font-family:var(--mono)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:17px}
+  pre{font-family:var(--mono);font-size:11.2px;line-height:1.52;color:#b8c0cc;white-space:pre;overflow:hidden}
+  .k{color:#7fa8c9}.s{color:#b0885f}.n{color:#c9a227}.c{color:#55606e}
+  .title{font-size:19px;letter-spacing:.06em;margin-bottom:3px}
+  .claim{font-size:15px;color:var(--gold);font-style:italic;margin:10px 0 3px}
+  .sub{font-size:11.5px;color:var(--dim);font-family:var(--mono)}
+  .row{display:grid;grid-template-columns:62px 1fr 168px;gap:11px;align-items:center;
+       margin:9px 0;font-size:12.5px}
+  .lbl{color:var(--dim);font-family:var(--mono);font-size:11px}
+  .bar{display:block;height:7px;background:#1c2026;border-radius:4px;overflow:hidden}
+  .fill{display:block;height:100%;border-radius:4px}
+  .val{font-family:var(--mono);font-size:11.5px;color:var(--ink)}
+  .sep{height:1px;background:var(--line);margin:15px 0}
+  .kin{display:grid;grid-template-columns:54px 1fr 42px;gap:10px;align-items:center;
+       margin:6px 0;font-size:12px}
+  .kbar{display:block;height:9px;background:#1c2026;border-radius:2px;overflow:hidden}
+  .pct{font-family:var(--mono);font-size:11.5px;text-align:right;color:var(--dim)}
+  .price{display:flex;align-items:baseline;gap:9px;margin-top:5px}
+  .pnum{font-size:33px;color:var(--gold);font-family:var(--mono)}
+  .note{font-size:11.5px;line-height:1.65;color:var(--dim);font-family:var(--mono)}
+  .ok{color:#6f9e6f}.no{color:var(--bad)}
+  .new{border-left:2px solid var(--ember);padding-left:11px;margin:13px 0}
+  .tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.11em;
+       text-transform:uppercase;color:var(--ember);border:1px solid var(--ember);
+       border-radius:3px;padding:1px 5px;margin-bottom:6px}
+  .warn{margin-top:16px;padding:9px 11px;border:1px dashed #4a3f2a;border-radius:5px;
+        font-family:var(--mono);font-size:10.5px;color:#9a8756;line-height:1.55}
+</style></head><body>
+
+<div>
+  <div class="h">ответ Jev · POST /v4/ai/evaluation-model</div>
+  <div class="panel"><pre><span class="c">// один вызов, все вопросы параллельно</span>
+{
+  <span class="k">"answers"</span>: {
+    <span class="k">"вес"</span>: {
+      <span class="k">"type"</span>: <span class="s">"score"</span>,
+      <span class="k">"score"</span>: <span class="n">3.41</span>,   <span class="c">// ← взвешенное среднее,</span>
+      <span class="c">//   уже детерминированное</span>
+      <span class="k">"probabilities"</span>: {
+        <span class="k">"2"</span>: <span class="n">0.11</span>, <span class="k">"3"</span>: <span class="n">0.44</span>,
+        <span class="k">"4"</span>: <span class="n">0.38</span>, <span class="k">"5"</span>: <span class="n">0.07</span>
+      }
+    },
+    <span class="k">"натяг"</span>: {
+      <span class="k">"type"</span>: <span class="s">"score"</span>,
+      <span class="k">"score"</span>: <span class="n">2.13</span>,
+      <span class="k">"probabilities"</span>: { <span class="k">"1"</span>: <span class="n">0.19</span>,
+        <span class="k">"2"</span>: <span class="n">0.52</span>, <span class="k">"3"</span>: <span class="n">0.29</span> }
+    },
+    <span class="k">"охват"</span>: { <span class="k">"type"</span>: <span class="s">"score"</span>, <span class="k">"score"</span>: <span class="n">3.02</span> },
+
+    <span class="c">// noul → в SDK называется boolean</span>
+    <span class="k">"верит_Ember"</span>: { <span class="k">"type"</span>: <span class="s">"boolean"</span>,
+                     <span class="k">"probability"</span>: <span class="n">0.91</span> },
+    <span class="k">"верит_Ford"</span>:  { <span class="k">"type"</span>: <span class="s">"boolean"</span>,
+                     <span class="k">"probability"</span>: <span class="n">0.48</span> },
+    <span class="k">"верит_Root"</span>:  { <span class="k">"type"</span>: <span class="s">"boolean"</span>,
+                     <span class="k">"probability"</span>: <span class="n">0.21</span> },
+    <span class="k">"верит_Flint"</span>: { <span class="k">"type"</span>: <span class="s">"boolean"</span>,
+                     <span class="k">"probability"</span>: <span class="n">0.07</span> }
+  },
+  <span class="k">"usage"</span>: { <span class="k">"inputTokens"</span>: <span class="n">1847</span>,
+             <span class="k">"outputTokens"</span>: <span class="n">0</span> }
+}</pre></div>
+  <div class="warn">МАКЕТ. Числа правдоподобные, но не из настоящего вызова —
+egress сессии закрыт политикой окружения. Форма ответа настоящая: взята
+из типов ai@7.0.107 и @ai-sdk/gateway@4.0.87.</div>
+</div>
+
+<div>
+  <div class="h">что видит игрок до оплаты · §5</div>
+  <div class="panel">
+    <div class="title">ЗНАМЕНИЕ · северный хребет</div>
+    <div class="sub">47 A.S. · осень · Шепчущий Artem</div>
+    <div class="claim">«Под хребтом что-то спит»</div>
+
+    <div class="sep"></div>
+
+    <div class="row"><span class="lbl">вес</span>
+      <span class="bar"><span class="fill" style="width:68%;background:var(--gold)"></span></span>
+      <span class="val">знамение</span></div>
+    <div class="row"><span class="lbl">натяг</span>
+      <span class="bar"><span class="fill" style="width:53%;background:var(--ember)"></span></span>
+      <span class="val">неожиданно</span></div>
+    <div class="row"><span class="lbl">охват</span>
+      <span class="bar"><span class="fill" style="width:75%;background:var(--cold)"></span></span>
+      <span class="val">область</span></div>
+
+    <div class="new">
+      <div class="tag">правка разбора</div>
+      <div class="sub" style="color:var(--ink);font-size:12.5px">ожидание: <span style="color:var(--gold)">дрожь земли до конца года</span></div>
+      <div class="note" style="margin-top:4px">Модель извлекла это из вашего текста.
+От него зависит, укрепится ли вера и вырастет ли репутация.<br>
+<span style="color:var(--ember)">▸ поправить формулировку</span></div>
+    </div>
+
+    <div class="sep"></div>
+    <div class="h" style="margin-bottom:7px">поверят</div>
+    <div class="kin"><span class="lbl">Ember</span><span class="kbar"><span class="fill" style="width:91%;background:var(--ember)"></span></span><span class="pct">91%</span></div>
+    <div class="kin"><span class="lbl">Ford</span><span class="kbar"><span class="fill" style="width:48%;background:#8a7a52"></span></span><span class="pct">48%</span></div>
+    <div class="kin"><span class="lbl">Root</span><span class="kbar"><span class="fill" style="width:21%;background:#5e6470"></span></span><span class="pct">21%</span></div>
+    <div class="kin"><span class="lbl">Flint</span><span class="kbar"><span class="fill" style="width:7%;background:#4a4f58"></span></span><span class="pct">7%</span></div>
+
+    <div class="sep"></div>
+
+    <div class="price"><span class="pnum">240</span><span style="color:var(--gold);font-size:19px">★</span>
+      <span class="note" style="margin-left:7px">в области живо 30 из 32 убеждений<br>
+      <span style="color:#9a8756">↑ дефицит слотов поднял цену на 18%</span></span></div>
+
+    <div class="sep"></div>
+    <div class="note">
+      <span class="ok">гарантируется</span>&nbsp;&nbsp;мир услышит<br>
+      <span class="no">не гарантируется</span>&nbsp;&nbsp;что ответит<br>
+      <span style="color:#55606e">котировка живёт 60 с</span>
+    </div>
+
+    <div class="new" style="margin-top:15px">
+      <div class="tag">правка разбора</div>
+      <div class="note" style="color:var(--ink)">если ожидание сбудется, награда
+        <span style="color:var(--gold)">×5,3</span> — обратно показанной вере.<br>
+        <span style="color:var(--dim)">Без этого «против течения» — доминируемая стратегия
+        (разрыв ×200, проверено).</span></div>
+    </div>
+  </div>
+</div>
+</body></html>
