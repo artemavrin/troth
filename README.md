@@ -14,6 +14,9 @@
 - [`docs/experiments-results.md`](docs/experiments-results.md) — проверка теорий
   экспериментом: три претензии разбора не подтвердились, на их месте нашлось
   расхождение серьёзнее. Протокол — в [`docs/experiments/`](docs/experiments/).
+- [`docs/mockups/`](docs/mockups/) — карта мира и распространение веры, посчитанные vgpu
+  headless на Dawn ([`belief-spread.png`](docs/mockups/belief-spread.png)), и предпросмотр
+  котировки §5 ([`quote.png`](docs/mockups/quote.png)).
 
 ## Состояние
 
